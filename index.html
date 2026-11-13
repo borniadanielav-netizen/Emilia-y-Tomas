@@ -3,1276 +3,1122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f8f5ef">
+<meta name="theme-color" content="#f8f3ed">
 <title>Emilia & Tomás | Nuestra boda</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --ivory:#faf7f0;
-  --cream:#eee3d2;
-  --gold:#b99a66;
-  --gold-light:#ead8b2;
-  --brown:#74634f;
-  --dark:#40372f;
-  --white:#fffefa;
+  --ivory: #f8f4ee;
+  --cream: #eee5d9;
+  --sand: #d8c7b2;
+  --champagne: #c7a77b;
+  --gold: #b89565;
+  --brown: #66564b;
+  --dark: #453a34;
+  --pink: #eadbd5;
 }
 
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html { scroll-behavior:smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  background:var(--ivory);
-  color:var(--dark);
-  font-family:'Montserrat',sans-serif;
-  overflow-x:hidden;
+  background: var(--ivory);
+  color: var(--brown);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
 }
 
-button,a { -webkit-tap-highlight-color:transparent; }
-button { font-family:inherit; }
-img { display:block; max-width:100%; }
-
-/* =========================================
-   SISTEMA DE BRILLOS GLOBAL
-========================================= */
-
-#sparkle-layer {
-  position:fixed;
-  inset:0;
-  z-index:80;
-  pointer-events:none;
-  overflow:hidden;
+body.locked {
+  overflow: hidden;
 }
 
-.sparkle {
-  position:absolute;
-  display:block;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:#f4d99c;
-  box-shadow:
-    0 0 5px #f4d99c,
-    0 0 12px rgba(220,181,112,.85),
-    0 0 22px rgba(220,181,112,.45);
-  opacity:0;
-  animation:glow 3.5s ease-in-out infinite;
+h1, h2, h3, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
 }
 
-.sparkle.star {
-  width:8px;
-  height:8px;
-  border-radius:0;
-  background:transparent;
-  box-shadow:none;
+button {
+  font-family: inherit;
 }
 
-.sparkle.star::before,
-.sparkle.star::after {
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:#e7c98d;
-  border-radius:5px;
-  box-shadow:0 0 7px rgba(221,185,119,.9);
-}
-
-.sparkle.star::before { width:1px;height:15px; }
-.sparkle.star::after { width:15px;height:1px; }
-
-@keyframes glow {
-  0%,100% {
-    opacity:0;
-    transform:scale(.25) rotate(0deg);
-  }
-  35% {
-    opacity:.85;
-    transform:scale(1) rotate(45deg);
-  }
-  55% {
-    opacity:.45;
-    transform:scale(.7) rotate(90deg);
-  }
-}
-
-/* Destellos de fondo */
-
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.25;
-  background-image:
-    radial-gradient(circle at 12% 20%, rgba(214,184,125,.25) 0 1px, transparent 2px),
-    radial-gradient(circle at 85% 35%, rgba(214,184,125,.2) 0 1px, transparent 2px),
-    radial-gradient(circle at 35% 75%, rgba(214,184,125,.2) 0 1px, transparent 2px);
-  background-size:170px 190px,210px 230px,190px 210px;
-}
-
-/* =========================================
-   APERTURA DEL SOBRE
-========================================= */
+/* =================================
+   PORTADA Y SOBRE
+================================= */
 
 .opening-screen {
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  overflow:hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse at center,rgba(255,255,255,.96),transparent 60%),
-    linear-gradient(145deg,#fbf8f1,#e9decc);
-  transition:opacity 1s ease,visibility 1s ease;
-}
-
-.opening-screen.closed {
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+    radial-gradient(ellipse at 50% 40%, rgba(255,255,255,.95), transparent 55%),
+    linear-gradient(145deg, #f7eee9, #eee2d8 55%, #e7d9cf);
+  transition: opacity 1s ease, visibility 1s ease;
 }
 
 .opening-screen::before,
 .opening-screen::after {
-  content:"";
-  position:absolute;
-  border:1px solid rgba(185,154,102,.2);
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  pointer-events:none;
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(184,149,101,.22);
+  border-radius: 50%;
+  width: 480px;
+  height: 480px;
+  pointer-events: none;
 }
 
 .opening-screen::after {
-  width:480px;
-  height:480px;
-  opacity:.5;
+  width: 620px;
+  height: 620px;
+  border-color: rgba(184,149,101,.12);
 }
 
-.envelope-container {
-  position:relative;
-  z-index:2;
-  width:min(390px,90vw);
-  text-align:center;
+.opening-screen.is-gone {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.opening-topline {
-  font-size:9px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:35px;
+.opening-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-/* Cuerpo del sobre */
+.opening-small {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #947b67;
+  margin-bottom: 25px;
+}
+
+.opening-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(37px, 8vw, 55px);
+  color: #715d50;
+  line-height: 1;
+  margin-bottom: 9px;
+}
+
+.opening-date {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #9a806b;
+  margin-bottom: 45px;
+}
 
 .envelope-scene {
-  position:relative;
-  width:100%;
-  height:255px;
-  perspective:1100px;
-  filter:drop-shadow(0 20px 25px rgba(87,65,39,.15));
+  position: relative;
+  width: min(310px, 82vw);
+  height: 215px;
+  perspective: 1000px;
+  margin: 0 auto 35px;
 }
 
+.envelope {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Fondo del sobre */
 .envelope-back {
-  position:absolute;
-  inset:0;
-  z-index:1;
-  border:1px solid rgba(185,154,102,.5);
-  border-radius:4px;
-  background:linear-gradient(140deg,#f2e8d8,#dfcdb2);
+  position: absolute;
+  inset: 0;
+  background: #e6d5c5;
+  border-radius: 5px;
+  box-shadow: 0 18px 40px rgba(91,67,49,.17);
 }
 
-/* Tarjeta interior */
-
-.envelope-card {
-  position:absolute;
-  z-index:2;
-  width:82%;
-  height:225px;
-  left:9%;
-  bottom:10px;
-  background:linear-gradient(150deg,#fffefa,#f8f3e9);
-  border:1px solid rgba(185,154,102,.35);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  color:var(--brown);
-  transform:translateY(0);
-  transition:transform 1.35s cubic-bezier(.2,.75,.25,1);
-  box-shadow:0 0 12px rgba(92,68,39,.07);
+/* Carta */
+.envelope-letter {
+  position: absolute;
+  width: 88%;
+  height: 88%;
+  left: 6%;
+  top: 5%;
+  z-index: 2;
+  background: #fffdf9;
+  border: 1px solid rgba(184,149,101,.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #816c5b;
+  transition: transform 1.15s cubic-bezier(.2,.75,.25,1);
+  transition-delay: .25s;
 }
 
-.card-monogram {
-  font-family:'Cormorant Garamond',serif;
-  font-size:43px;
-  font-weight:300;
-  color:var(--gold);
-  line-height:1;
+.letter-monogram {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 39px;
+  color: var(--gold);
+  margin-bottom: 7px;
 }
 
-.card-divider {
-  width:35px;
-  height:1px;
-  background:var(--gold);
-  margin:12px 0;
+.letter-text {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.card-label {
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:#9c886d;
-}
-
-/* Solapas del sobre */
-
+/* Bolsillo delantero */
 .envelope-front {
-  position:absolute;
-  z-index:4;
-  inset:0;
-  background:linear-gradient(145deg,#eadbc5,#f3e9da);
-  clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%);
-  border-radius:3px;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #ddc9b7;
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
 }
 
-.envelope-left {
-  position:absolute;
-  z-index:5;
-  inset:0;
-  background:linear-gradient(45deg,#e3d1b8,#f3e8d8);
-  clip-path:polygon(0 0,50% 54%,0 100%);
+.envelope-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.16), transparent 55%);
 }
-
-.envelope-right {
-  position:absolute;
-  z-index:5;
-  inset:0;
-  background:linear-gradient(135deg,#f4eadb,#dfcdb3);
-  clip-path:polygon(100% 0,50% 54%,100% 100%);
-}
-
-/* Solapa superior */
 
 .envelope-flap {
-  position:absolute;
-  z-index:7;
-  inset:0;
-  background:linear-gradient(160deg,#f8efe2,#e7d6be);
-  clip-path:polygon(0 0,100% 0,50% 57%);
-  transform-origin:top center;
-  transform:rotateX(0deg);
-  transition:transform 1s cubic-bezier(.4,0,.2,1);
-  backface-visibility:visible;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: linear-gradient(145deg, #eadbce, #d8c2ae);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: 50% 0%;
+  transform: rotateX(0deg);
+  transition: transform .85s ease;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 3px 2px rgba(90,65,45,.08));
 }
 
-/* Sello de lacre */
-
-.wax-seal {
-  position:absolute;
-  z-index:9;
-  left:50%;
-  top:54%;
-  width:59px;
-  height:59px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle at 35% 28%,#f0dfb9,#c3a16a 65%,#967342);
-  color:#fff9ed;
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;
-  border:2px solid rgba(255,255,255,.5);
-  box-shadow:
-    0 4px 12px rgba(91,67,35,.25),
-    inset 0 0 0 2px rgba(255,255,255,.2);
-  transition:opacity .35s ease,transform .6s ease;
+.envelope-seal {
+  position: absolute;
+  z-index: 6;
+  width: 48px;
+  height: 48px;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d9bd91, #a98658);
+  color: #fff9ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  box-shadow: 0 4px 12px rgba(90,65,45,.2);
+  transition: opacity .35s ease, transform .5s ease;
 }
 
-/* Secuencia de apertura */
-
-.opening-screen.opening .envelope-flap {
-  transform:rotateX(180deg);
+.opening-screen.is-opening .envelope-flap {
+  transform: rotateX(180deg);
 }
 
-.opening-screen.opening .wax-seal {
-  opacity:0;
-  transform:translate(-50%,-50%) scale(.4) rotate(-25deg);
+.opening-screen.is-opening .envelope-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.5);
 }
 
-.opening-screen.opening .envelope-card {
-  transform:translateY(-145px);
-  transition-delay:.45s;
-}
-
-.opening-screen.opening .envelope-front,
-.opening-screen.opening .envelope-left,
-.opening-screen.opening .envelope-right {
-  transition:opacity .8s ease;
-  transition-delay:1s;
-  opacity:.15;
-}
-
-.opening-message {
-  font-family:'Cormorant Garamond',serif;
-  font-size:36px;
-  font-weight:400;
-  color:var(--brown);
-  margin:30px 0 7px;
-}
-
-.opening-subtitle {
-  font-size:9px;
-  letter-spacing:3px;
-  color:#9a876e;
-  text-transform:uppercase;
-  margin-bottom:25px;
+.opening-screen.is-opening .envelope-letter {
+  transform: translateY(-155px);
 }
 
 .open-button {
-  border:1px solid var(--gold);
-  background:rgba(255,255,255,.35);
-  color:var(--brown);
-  padding:15px 30px;
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:all .3s ease;
+  border: 1px solid #b99a76;
+  background: transparent;
+  color: #806b58;
+  padding: 14px 34px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s ease;
 }
 
 .open-button:hover {
-  background:var(--gold);
-  color:white;
+  background: #b99a76;
+  color: white;
 }
 
-/* =========================================
-   ESTILO GENERAL
-========================================= */
+.opening-screen.is-opening .open-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =================================
+   BRILLOS
+================================= */
+
+#sparkle-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c6a36e;
+  box-shadow: 0 0 7px 2px rgba(198,163,110,.35);
+  opacity: 0;
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+.sparkle::before,
+.sparkle::after {
+  content: "";
+  position: absolute;
+  background: rgba(198,163,110,.75);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sparkle::before {
+  width: 1px;
+  height: 12px;
+}
+
+.sparkle::after {
+  width: 12px;
+  height: 1px;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(.5); }
+  50% { opacity: .8; transform: scale(1.2); }
+}
+
+/* =================================
+   ESTILOS GENERALES
+================================= */
 
 section {
-  position:relative;
-  z-index:1;
-  padding:100px 22px;
-  text-align:center;
+  padding: 90px 22px;
+  text-align: center;
+  position: relative;
 }
 
-.eyebrow {
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:4px;
-  font-size:9px;
-  margin-bottom:18px;
-  font-weight:400;
+.section-label {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 17px;
 }
 
-h2 {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(42px,7vw,62px);
-  font-weight:400;
-  line-height:1.05;
-  color:var(--brown);
-  margin-bottom:20px;
+.section-title {
+  font-size: clamp(38px, 8vw, 54px);
+  color: #756153;
+  line-height: 1.05;
+  margin-bottom: 20px;
 }
 
 .section-text {
-  max-width:520px;
-  margin:auto;
-  font-size:11px;
-  line-height:2.2;
-  letter-spacing:.4px;
-  color:#81766a;
-  font-weight:300;
+  max-width: 510px;
+  margin: 0 auto;
+  font-size: 11px;
+  line-height: 2.1;
+  color: #83766b;
 }
 
 .gold-line {
-  width:55px;
-  height:1px;
-  background:var(--gold);
-  margin:28px auto;
+  width: 42px;
+  height: 1px;
+  background: var(--champagne);
+  margin: 25px auto;
 }
 
-.gold-button {
-  display:inline-block;
-  background:var(--gold);
-  color:white;
-  text-decoration:none;
-  border:1px solid var(--gold);
-  padding:15px 27px;
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  transition:.3s;
-  cursor:pointer;
-}
-
-.gold-button:hover {
-  background:transparent;
-  color:var(--brown);
-}
-
-/* =========================================
+/* =================================
    HERO
-========================================= */
+================================= */
 
 .hero {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  z-index:1;
-  padding:80px 20px;
+  min-height: 690px;
+  height: 95vh;
+  max-height: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 30px 20px;
   background:
-    linear-gradient(rgba(45,38,30,.28),rgba(45,38,30,.4)),
-    url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85') center/cover;
-  color:white;
+    linear-gradient(rgba(54,43,36,.28), rgba(54,43,36,.43)),
+    url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1800&q=85') center 45% / cover;
 }
 
 .hero-content {
-  position:relative;
-  z-index:2;
-  text-align:center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-overline {
-  text-transform:uppercase;
-  letter-spacing:5px;
-  font-size:9px;
-  margin-bottom:27px;
-  font-weight:300;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
 }
 
 .hero h1 {
-  font-family:'Cormorant Garamond',serif;
-  font-weight:300;
-  font-size:clamp(65px,13vw,112px);
-  line-height:.83;
-  letter-spacing:-2px;
+  font-size: clamp(65px, 14vw, 110px);
+  line-height: .83;
+  font-weight: 400;
+  text-shadow: 0 3px 20px rgba(0,0,0,.15);
 }
 
-.hero-ampersand {
-  font-family:'Cormorant Garamond',serif;
-  color:#ead7af;
-  font-size:48px;
-  margin:17px 0;
-  font-style:italic;
+.hero-amp {
+  display: block;
+  font-size: 42px;
+  font-style: italic;
+  margin: 12px 0;
 }
 
 .hero-date {
-  margin-top:38px;
-  font-size:9px;
-  letter-spacing:5px;
-  text-transform:uppercase;
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-top: 32px;
 }
 
-.hero-scroll {
-  position:absolute;
-  bottom:35px;
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:white;
-}
-
-/* =========================================
+/* =================================
    INTRO
-========================================= */
+================================= */
 
-.intro { background:var(--white); }
+.intro {
+  background: #faf7f2;
+}
 
 .intro-quote {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(30px,5vw,43px);
-  font-style:italic;
-  font-weight:300;
-  color:var(--brown);
-  max-width:650px;
-  margin:0 auto 25px;
-  line-height:1.3;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #927b68;
+  max-width: 470px;
+  margin: 0 auto 25px;
 }
 
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-.countdown-section { background:#eee5d8; }
+/* =================================
+   CUENTA REGRESIVA
+================================= */
 
 .countdown {
-  display:flex;
-  justify-content:center;
-  gap:clamp(12px,5vw,45px);
-  flex-wrap:wrap;
-  margin-top:40px;
+  background: #eee5db;
+  padding-top: 75px;
+  padding-bottom: 75px;
 }
 
-.countdown-item { min-width:65px; }
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 6vw, 45px);
+  margin-top: 35px;
+}
+
+.countdown-item strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 8vw, 55px);
+  font-weight: 400;
+  color: #806b58;
+}
 
 .countdown-item span {
-  display:block;
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(42px,8vw,65px);
-  font-weight:300;
-  color:var(--brown);
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9a8878;
 }
 
-.countdown-item small {
-  font-size:8px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#96846d;
-}
-
-/* =========================================
+/* =================================
    HISTORIA
-========================================= */
+================================= */
 
-.story { background:var(--ivory); }
+.story {
+  background: #faf7f2;
+}
 
 .story-image {
-  width:min(480px,100%);
-  height:420px;
-  object-fit:cover;
-  margin:40px auto 30px;
+  width: min(100%, 540px);
+  height: 420px;
+  object-fit: cover;
+  margin: 35px auto;
+  display: block;
 }
 
-/* =========================================
+/* =================================
    GALERÍA
-========================================= */
+================================= */
 
-.gallery { background:var(--white); }
+.gallery {
+  background: #eee5db;
+}
 
 .gallery-grid {
-  max-width:950px;
-  margin:45px auto 0;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  max-width: 900px;
+  margin: 35px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
 }
 
 .gallery-grid img {
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  cursor:pointer;
-  transition:transform .5s,filter .5s;
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform .4s ease, opacity .4s ease;
 }
 
 .gallery-grid img:hover {
-  transform:scale(.98);
-  filter:brightness(.9);
+  transform: scale(1.02);
+  opacity: .9;
 }
 
 .gallery-grid img:first-child {
-  grid-row:span 2;
-  height:612px;
+  grid-column: span 2;
+  height: 390px;
 }
 
 .lightbox {
-  position:fixed;
-  inset:0;
-  z-index:200;
-  background:rgba(25,22,19,.94);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  background: rgba(35,29,25,.94);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.lightbox.active { display:flex; }
+.lightbox.active {
+  display: flex;
+}
 
 .lightbox img {
-  max-width:95%;
-  max-height:85vh;
-  object-fit:contain;
+  max-width: 95%;
+  max-height: 85vh;
+  object-fit: contain;
 }
 
 .lightbox-close {
-  position:absolute;
-  right:25px;
-  top:20px;
-  color:white;
-  font-size:32px;
-  background:none;
-  border:none;
-  cursor:pointer;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: white;
+  font-size: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* =========================================
-   EVENTO
-========================================= */
+/* =================================
+   DETALLES DEL EVENTO
+================================= */
 
-.event { background:#eee5d8; }
-
-.event-card {
-  max-width:460px;
-  margin:35px auto 0;
-  padding:45px 25px;
-  background:rgba(255,253,249,.75);
-  border:1px solid rgba(185,154,102,.45);
+.details {
+  background: #faf7f2;
 }
 
-.event-icon {
-  font-size:25px;
-  color:var(--gold);
-  margin-bottom:12px;
+.detail-card {
+  max-width: 470px;
+  margin: 35px auto 0;
+  padding: 38px 25px;
+  border: 1px solid #e3d4c4;
+  background: rgba(255,255,255,.4);
 }
 
-.event-card h3 {
-  font-family:'Cormorant Garamond',serif;
-  font-size:34px;
-  font-weight:400;
-  color:var(--brown);
-  margin-bottom:10px;
+.detail-card h3 {
+  font-size: 31px;
+  color: #806b58;
+  margin-bottom: 12px;
 }
 
-.event-card p {
-  font-size:10px;
-  line-height:2.2;
-  color:#81766a;
+.detail-card p {
+  font-size: 10px;
+  line-height: 2;
+  letter-spacing: 1px;
+  color: #88796d;
 }
 
-/* =========================================
+.detail-icon {
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 15px;
+}
+
+.outline-link {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 25px;
+  border: 1px solid var(--champagne);
+  color: #806b58;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.outline-link:hover {
+  background: var(--champagne);
+  color: white;
+}
+
+/* =================================
    DRESS CODE
-========================================= */
+================================= */
 
-.dress-code { background:var(--white); }
-
-.dress-code strong {
-  display:block;
-  font-family:'Cormorant Garamond',serif;
-  font-size:34px;
-  font-weight:400;
-  color:var(--brown);
-  margin:20px 0 10px;
+.dresscode {
+  background: #eee5db;
 }
 
-/* =========================================
-   RSVP
-========================================= */
+.dresscode-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  color: var(--gold);
+  margin: 15px 0;
+}
+
+/* =================================
+   CONFIRMACIÓN
+================================= */
 
 .rsvp {
-  background:
-    linear-gradient(rgba(56,45,33,.45),rgba(56,45,33,.55)),
-    url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=85') center/cover;
-  color:white;
+  background: #faf7f2;
 }
 
-.rsvp h2,
-.rsvp .eyebrow,
-.rsvp .section-text { color:white; }
+.rsvp-box {
+  max-width: 500px;
+  margin: 30px auto 0;
+  padding: 38px 25px;
+  background: #eee5db;
+}
 
-/* =========================================
+.rsvp-box p {
+  font-size: 11px;
+  line-height: 2;
+}
+
+.rsvp-button {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 15px 30px;
+  background: #9c8065;
+  color: white;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.rsvp-button:hover {
+  background: #756153;
+}
+
+/* =================================
    REGALOS
-========================================= */
+================================= */
 
-.gifts { background:var(--ivory); }
-
-.alias-box {
-  display:inline-block;
-  margin:25px auto;
-  padding:18px 28px;
-  border:1px solid var(--gold);
-  background:rgba(255,255,255,.6);
-  font-size:12px;
-  letter-spacing:2px;
-  color:var(--brown);
+.gifts {
+  background: #eee5db;
 }
 
-.copy-button {
-  display:block;
-  margin:0 auto;
-  padding:12px 20px;
-  background:transparent;
-  border:1px solid var(--gold);
-  color:var(--brown);
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  cursor:pointer;
+.alias {
+  display: inline-block;
+  padding: 13px 25px;
+  border: 1px solid #cbb79f;
+  margin-top: 20px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #806b58;
+  cursor: pointer;
+  background: transparent;
 }
 
-/* =========================================
-   CIERRE
-========================================= */
-
-.closing {
-  background:#e9dfd0;
-  padding:110px 20px;
+.copy-message {
+  font-size: 10px;
+  margin-top: 10px;
+  color: #9b805f;
+  min-height: 15px;
 }
 
-.closing h2 { font-size:clamp(52px,9vw,78px); }
-
-.closing-names {
-  font-family:'Cormorant Garamond',serif;
-  font-size:38px;
-  font-weight:400;
-  color:var(--brown);
-  margin-top:25px;
-}
+/* =================================
+   FOOTER
+================================= */
 
 footer {
-  position:relative;
-  z-index:1;
-  background:var(--dark);
-  color:#e8dcc8;
-  padding:25px;
-  text-align:center;
-  font-size:8px;
-  letter-spacing:3px;
+  padding: 65px 20px;
+  background: #756153;
+  color: #f8f1e9;
+  text-align: center;
 }
 
-/* =========================================
-   MÚSICA
-========================================= */
-
-.music-button {
-  position:fixed;
-  z-index:90;
-  bottom:22px;
-  right:20px;
-  width:45px;
-  height:45px;
-  border:1px solid rgba(185,154,102,.7);
-  background:rgba(255,253,249,.95);
-  color:var(--brown);
-  border-radius:50%;
-  cursor:pointer;
-  font-size:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
+footer h2 {
+  font-size: 48px;
+  margin-bottom: 12px;
 }
 
-/* =========================================
-   REVEAL
-========================================= */
+footer p {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* =================================
+   ANIMACIÓN AL SCROLL
+================================= */
 
 .reveal {
-  opacity:0;
-  transform:translateY(25px);
-  transition:opacity 1s ease,transform 1s ease;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .9s ease, transform .9s ease;
 }
 
 .reveal.visible {
-  opacity:1;
-  transform:translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* =========================================
+/* =================================
    RESPONSIVE
-========================================= */
+================================= */
 
-@media(max-width:600px) {
-  section { padding:75px 20px; }
-  .hero { min-height:92vh; }
-  .gallery-grid { gap:8px; }
-  .gallery-grid img { height:190px; }
-  .gallery-grid img:first-child { height:388px; }
-  .story-image { height:320px; }
-  .envelope-scene { height:235px; }
-  .opening-message { font-size:32px; }
+@media (max-width: 600px) {
+  section {
+    padding: 72px 20px;
+  }
+
+  .hero {
+    min-height: 650px;
+    height: 90vh;
+  }
+
+  .story-image {
+    height: 340px;
+  }
+
+  .gallery-grid {
+    gap: 8px;
+  }
+
+  .gallery-grid img {
+    height: 190px;
+  }
+
+  .gallery-grid img:first-child {
+    height: 270px;
+  }
+
+  .countdown-grid {
+    gap: 17px;
+  }
+
+  .countdown-item span {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .envelope-scene {
+    height: 195px;
+  }
 }
 
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    scroll-behavior:auto !important;
-    animation-duration:.01ms !important;
-    transition-duration:.01ms !important;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
   }
 }
 </style>
 </head>
 
-<body>
+<body class="locked">
 
-<div id="sparkle-layer" aria-hidden="true"></div>
+<!-- =================================
+     PORTADA
+================================= -->
 
-<!-- APERTURA -->
+<div class="opening-screen" id="openingScreen">
+  <div class="opening-content">
+    <p class="opening-small">Tenemos una invitación para vos</p>
 
-<div class="opening-screen" id="opening">
-
-  <div class="envelope-container">
-
-    <div class="opening-topline">Una invitación especial</div>
+    <div class="opening-names">Emilia & Tomás</div>
+    <p class="opening-date">18 · 04 · 2027</p>
 
     <div class="envelope-scene">
+      <div class="envelope">
+        <div class="envelope-back"></div>
 
-      <div class="envelope-back"></div>
+        <div class="envelope-letter">
+          <div class="letter-monogram">E & T</div>
+          <div class="letter-text">Una historia de amor</div>
+        </div>
 
-      <div class="envelope-card">
-        <div class="card-monogram">E <span style="font-style:italic">&</span> T</div>
-        <div class="card-divider"></div>
-        <div class="card-label">Nos casamos</div>
-        <div class="card-label" style="margin-top:10px">18 · 04 · 2027</div>
+        <div class="envelope-front"></div>
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-seal">E&T</div>
       </div>
-
-      <div class="envelope-front"></div>
-      <div class="envelope-left"></div>
-      <div class="envelope-right"></div>
-      <div class="envelope-flap"></div>
-
-      <div class="wax-seal">E&T</div>
-
     </div>
 
-    <div class="opening-message">¡Nos casamos!</div>
-    <div class="opening-subtitle">Tenemos algo que compartir con vos</div>
-
-    <button class="open-button" id="openButton" onclick="openInvitation()">
+    <button class="open-button" id="openButton" type="button">
       Abrir invitación
     </button>
-
   </div>
 </div>
 
-<!-- HERO -->
+<div id="sparkle-layer"></div>
 
-<header class="hero">
-  <div class="hero-content">
-    <div class="hero-overline">El comienzo de nuestra historia</div>
-    <h1>Emilia</h1>
-    <div class="hero-ampersand">&</div>
-    <h1>Tomás</h1>
-    <div class="hero-date">18 · 04 · 2027</div>
-  </div>
-  <div class="hero-scroll">Deslizá para descubrir</div>
-</header>
+<!-- =================================
+     INVITACIÓN
+================================= -->
 
-<!-- INTRO -->
+<main>
 
-<section class="intro">
-  <div class="reveal">
-    <div class="eyebrow">Un día inolvidable</div>
-    <p class="intro-quote">
-      “Hay momentos que se convierten en recuerdos para toda la vida.
-      Y queremos vivir este junto a vos.”
-    </p>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-overline">Un día · Una historia · Para siempre</p>
+      <h1>Emilia <span class="hero-amp">&</span> Tomás</h1>
+      <p class="hero-date">18 · ABRIL · 2027</p>
+    </div>
+  </header>
+
+  <section class="intro reveal">
+    <p class="section-label">¡Nos casamos!</p>
+    <h2 class="intro-quote">
+      “Hay encuentros que cambian la vida y personas con las que queremos compartirla”.
+    </h2>
     <div class="gold-line"></div>
     <p class="section-text">
-      Después de tantos sueños compartidos, llegó el momento de celebrar
-      nuestro amor y comenzar una nueva etapa juntos.
+      Después de tantos momentos compartidos, llegó el momento de celebrar
+      nuestro amor junto a las personas que más queremos.
+      Nos encantaría que seas parte de este día tan especial.
     </p>
-  </div>
-</section>
+  </section>
 
-<!-- CUENTA REGRESIVA -->
+  <section class="countdown reveal">
+    <p class="section-label">La cuenta regresiva comenzó</p>
+    <h2 class="section-title">Falta muy poquito</h2>
 
-<section class="countdown-section">
-  <div class="reveal">
-    <div class="eyebrow">La cuenta regresiva comenzó</div>
-    <h2>Falta cada vez menos</h2>
-    <div class="countdown">
-      <div class="countdown-item"><span id="days">00</span><small>Días</small></div>
-      <div class="countdown-item"><span id="hours">00</span><small>Horas</small></div>
-      <div class="countdown-item"><span id="minutes">00</span><small>Minutos</small></div>
-      <div class="countdown-item"><span id="seconds">00</span><small>Segundos</small></div>
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <strong id="days">00</strong>
+        <span>Días</span>
+      </div>
+      <div class="countdown-item">
+        <strong id="hours">00</strong>
+        <span>Horas</span>
+      </div>
+      <div class="countdown-item">
+        <strong id="minutes">00</strong>
+        <span>Minutos</span>
+      </div>
+      <div class="countdown-item">
+        <strong id="seconds">00</strong>
+        <span>Segundos</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- HISTORIA -->
-
-<section class="story">
-  <div class="reveal">
-    <div class="eyebrow">Nuestra historia</div>
-    <h2>Un amor, mil momentos</h2>
+  <section class="story reveal">
+    <p class="section-label">Nuestra historia</p>
+    <h2 class="section-title">Un camino juntos</h2>
     <p class="section-text">
-      Entre encuentros, risas, aventuras y sueños, fuimos construyendo
-      una historia que hoy queremos celebrar con las personas que más queremos.
+      Lo que comenzó con una mirada se convirtió en una historia llena
+      de risas, aventuras, aprendizajes y sueños compartidos.
+      Hoy queremos dar un nuevo paso y celebrarlo con vos.
     </p>
-    <img class="story-image"
-      src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1000&q=85"
-      alt="Pareja celebrando su amor" loading="lazy">
+
+    <img
+      class="story-image"
+      src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1200&q=85"
+      alt="Pareja compartiendo un momento romántico"
+      loading="lazy"
+    >
+  </section>
+
+  <section class="gallery reveal">
+    <p class="section-label">Nuestros momentos</p>
+    <h2 class="section-title">Recuerdos que nos unen</h2>
     <p class="section-text">
-      Y lo más lindo de esta historia es que todavía nos queda todo por vivir.
+      Pequeños instantes que forman parte de nuestra historia.
     </p>
-  </div>
-</section>
-
-<!-- GALERÍA -->
-
-<section class="gallery">
-  <div class="reveal">
-    <div class="eyebrow">Nuestros recuerdos</div>
-    <h2>Instantes que atesoramos</h2>
-    <p class="section-text">Cada fotografía guarda un pedacito de nuestra historia.</p>
 
     <div class="gallery-grid">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85" alt="Boda" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=85" alt="Celebración" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=85" alt="Pareja" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=900&q=85" alt="Anillos" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=900&q=85" alt="Decoración" loading="lazy">
+      <img
+        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85"
+        alt="Pareja abrazada al aire libre"
+        loading="lazy"
+      >
+      <img
+        src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=85"
+        alt="Pareja disfrutando un momento juntos"
+        loading="lazy"
+      >
+      <img
+        src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=900&q=85"
+        alt="Pareja compartiendo un recuerdo"
+        loading="lazy"
+      >
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- LIGHTBOX -->
+  <section class="details reveal">
+    <p class="section-label">Queremos compartirlo con vos</p>
+    <h2 class="section-title">El gran día</h2>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Cerrar">×</button>
-  <img id="lightbox-image" src="" alt="Fotografía ampliada">
+    <div class="detail-card">
+      <div class="detail-icon">✧</div>
+      <h3>Ceremonia & celebración</h3>
+      <p>DOMINGO 18 DE ABRIL DE 2027</p>
+      <p>20:30 HORAS</p>
+      <div class="gold-line"></div>
+      <p>CASA MAGNOLIA</p>
+      <p>CANNING · BUENOS AIRES</p>
+
+      <a
+        class="outline-link"
+        href="https://www.google.com/maps/search/?api=1&query=Casa+Magnolia+Canning+Buenos+Aires"
+        target="_blank"
+        rel="noopener"
+      >
+        Ver ubicación
+      </a>
+    </div>
+  </section>
+
+  <section class="dresscode reveal">
+    <p class="section-label">Un detalle para esa noche</p>
+    <h2 class="section-title">Dress code</h2>
+    <div class="dresscode-symbol">✧</div>
+    <h3 class="serif" style="font-size:30px; margin-bottom:12px;">
+      Elegante
+    </h3>
+    <p class="section-text">
+      Queremos que te sientas cómodo/a y disfrutes de una noche inolvidable.
+    </p>
+  </section>
+
+  <section class="rsvp reveal">
+    <p class="section-label">Tu presencia es nuestro mejor regalo</p>
+    <h2 class="section-title">¿Nos acompañás?</h2>
+
+    <div class="rsvp-box">
+      <p>
+        Nos encantaría contar con vos en este día tan importante.
+        Por favor, confirmá tu asistencia.
+      </p>
+
+      <a
+        class="rsvp-button"
+        href="https://wa.me/5491112345678?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Emilia%20y%20Tom%C3%A1s."
+        target="_blank"
+        rel="noopener"
+      >
+        Confirmar asistencia
+      </a>
+    </div>
+  </section>
+
+  <section class="gifts reveal">
+    <p class="section-label">Un gesto de cariño</p>
+    <h2 class="section-title">Regalos</h2>
+    <p class="section-text">
+      Lo más importante para nosotros es compartir este día con vos.
+      Si además querés hacernos un regalo, te dejamos nuestro alias.
+    </p>
+
+    <button class="alias" id="copyAlias" type="button">
+      emilia.tomas.regalos
+    </button>
+    <p class="copy-message" id="copyMessage"></p>
+  </section>
+
+  <footer>
+    <h2>Emilia & Tomás</h2>
+    <p>¡Te esperamos para celebrar el amor!</p>
+  </footer>
+
+</main>
+
+<!-- VISOR DE FOTOS -->
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="closeLightbox" type="button" aria-label="Cerrar">
+    ×
+  </button>
+  <img id="lightboxImage" src="" alt="Foto ampliada">
 </div>
 
-<!-- EVENTO -->
-
-<section class="event">
-  <div class="reveal">
-    <div class="eyebrow">La celebración</div>
-    <h2>Queremos compartirlo con vos</h2>
-
-    <div class="event-card">
-      <div class="event-icon">✧</div>
-      <h3>Ceremonia & celebración</h3>
-      <p>DOMINGO 18 DE ABRIL DE 2027<br>20:30 HORAS</p>
-      <div class="gold-line"></div>
-      <h3>Casa Magnolia</h3>
-      <p>Canning<br>Buenos Aires, Argentina</p>
-      <a class="gold-button" style="margin-top:25px"
-        href="https://www.google.com/maps/search/?api=1&query=Casa+Magnolia+Canning"
-        target="_blank" rel="noopener">Ver ubicación</a>
-    </div>
-  </div>
-</section>
-
-<!-- DRESS CODE -->
-
-<section class="dress-code">
-  <div class="reveal">
-    <div class="eyebrow">Un detalle especial</div>
-    <h2>Dress code</h2>
-    <strong>Elegante</strong>
-    <p class="section-text">
-      Nos encantaría compartir una noche especial con vos.
-      Elegí tu look favorito y preparate para celebrar.
-    </p>
-  </div>
-</section>
-
-<!-- RSVP -->
-
-<section class="rsvp">
-  <div class="reveal">
-    <div class="eyebrow">Tu presencia es nuestro regalo</div>
-    <h2>¿Nos acompañás?</h2>
-    <p class="section-text">
-      Queremos contar con vos en este día tan importante.
-      Por favor, confirmá tu asistencia.
-    </p>
-    <a class="gold-button"
-      style="margin-top:30px;background:#f8f5ef;color:#74634f;border-color:#f8f5ef"
-      href="https://wa.me/5491100000000?text=Hola%21%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Emilia%20y%20Tom%C3%A1s."
-      target="_blank" rel="noopener">Confirmar asistencia</a>
-  </div>
-</section>
-
-<!-- REGALOS -->
-
-<section class="gifts">
-  <div class="reveal">
-    <div class="eyebrow">Un gesto de cariño</div>
-    <h2>Un regalo para nuestra nueva etapa</h2>
-    <p class="section-text">
-      Lo más importante para nosotros es que estés presente.
-      Si además deseás hacernos un regalo, te compartimos nuestro alias.
-    </p>
-    <div class="alias-box" id="alias">EMILIA.TOMAS.BODA</div>
-    <button class="copy-button" onclick="copyAlias()">Copiar alias</button>
-    <p id="copy-message" style="font-size:10px;margin-top:12px;color:#96846d"></p>
-  </div>
-</section>
-
-<!-- CALENDARIO -->
-
-<section class="event" style="background:#f8f5ef">
-  <div class="reveal">
-    <div class="eyebrow">Agendá la fecha</div>
-    <h2>Reservá este día</h2>
-    <p class="section-text">
-      Queremos que seas parte de este momento.
-      Guardá la fecha en tu calendario.
-    </p>
-    <button class="gold-button" style="margin-top:25px" onclick="downloadCalendar()">
-      Agregar al calendario
-    </button>
-  </div>
-</section>
-
-<!-- CIERRE -->
-
-<section class="closing">
-  <div class="reveal">
-    <div class="eyebrow">Con todo nuestro amor</div>
-    <h2>¡Te esperamos!</h2>
-    <p class="section-text">
-      Gracias por ser parte de nuestra historia.
-      Tenemos muchas ganas de compartir esta noche con vos.
-    </p>
-    <div class="closing-names">Emilia & Tomás</div>
-    <div class="gold-line"></div>
-    <p class="eyebrow">18 · 04 · 2027</p>
-  </div>
-</section>
-
-<footer>CON AMOR · EMILIA & TOMÁS</footer>
-
-<button class="music-button" id="musicButton" onclick="toggleMusic()" aria-label="Activar o pausar música">♫</button>
-
 <script>
+/* =================================
+   APERTURA DEL SOBRE
+================================= */
 
-/* =========================================
-   APERTURA ANIMADA
-========================================= */
+const openingScreen = document.getElementById('openingScreen');
+const openButton = document.getElementById('openButton');
 
 let invitationOpened = false;
 
-function openInvitation() {
+openButton.addEventListener('click', function () {
   if (invitationOpened) return;
 
   invitationOpened = true;
+  openButton.disabled = true;
 
-  const opening = document.getElementById('opening');
-  const button = document.getElementById('openButton');
+  // Inicia la animación del sobre
+  openingScreen.classList.add('is-opening');
 
-  button.textContent = 'Abriendo invitación...';
-  opening.classList.add('opening');
+  // Después de que la carta sale, se desvanece la portada
+  window.setTimeout(function () {
+    openingScreen.classList.add('is-gone');
+    document.body.classList.remove('locked');
+  }, 1900);
+});
 
-  setTimeout(() => {
-    opening.classList.add('closed');
-    document.body.style.overflow = 'auto';
-    window.scrollTo({top:0,behavior:'smooth'});
-  },1800);
-}
-
-/* =========================================
-   GENERADOR DE BRILLOS
-========================================= */
+/* =================================
+   DESTELLOS
+================================= */
 
 const sparkleLayer = document.getElementById('sparkle-layer');
 
-function createSparkles() {
-  const total = window.innerWidth < 600 ? 45 : 75;
-
-  for (let i = 0; i < total; i++) {
-    const sparkle = document.createElement('span');
-    const isStar = Math.random() > 0.68;
-
-    sparkle.className = isStar ? 'sparkle star' : 'sparkle';
-
-    sparkle.style.left = Math.random() * 100 + '%';
-    sparkle.style.top = Math.random() * 100 + '%';
-    sparkle.style.animationDelay = (Math.random() * 6) + 's';
-    sparkle.style.animationDuration = (2.5 + Math.random() * 4) + 's';
-
-    const size = 2 + Math.random() * 3;
-    sparkle.style.width = size + 'px';
-    sparkle.style.height = size + 'px';
-
-    sparkleLayer.appendChild(sparkle);
-  }
+for (let i = 0; i < 32; i++) {
+  const sparkle = document.createElement('span');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = Math.random() * 100 + '%';
+  sparkle.style.top = Math.random() * 100 + '%';
+  sparkle.style.animationDelay = (Math.random() * 5) + 's';
+  sparkle.style.animationDuration = (3 + Math.random() * 4) + 's';
+  sparkleLayer.appendChild(sparkle);
 }
 
-createSparkles();
-
-/* =========================================
+/* =================================
    CUENTA REGRESIVA
-========================================= */
+================================= */
 
 const weddingDate = new Date('2027-04-18T20:30:00-03:00').getTime();
 
 function updateCountdown() {
-  const difference = weddingDate - Date.now();
+  const now = Date.now();
+  const distance = weddingDate - now;
 
-  if (difference <= 0) {
-    ['days','hours','minutes','seconds'].forEach(id => {
-      document.getElementById(id).textContent = '00';
-    });
+  if (distance <= 0) {
+    document.getElementById('days').textContent = '00';
+    document.getElementById('hours').textContent = '00';
+    document.getElementById('minutes').textContent = '00';
+    document.getElementById('seconds').textContent = '00';
     return;
   }
 
-  const days = Math.floor(difference / 86400000);
-  const hours = Math.floor((difference / 3600000) % 24);
-  const minutes = Math.floor((difference / 60000) % 60);
-  const seconds = Math.floor((difference / 1000) % 60);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+  const seconds = Math.floor((distance / 1000) % 60);
 
-  document.getElementById('days').textContent = String(days).padStart(2,'0');
-  document.getElementById('hours').textContent = String(hours).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 }
 
 updateCountdown();
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 
-/* =========================================
-   GALERÍA
-========================================= */
+/* =================================
+   APARICIÓN AL DESPLAZARSE
+================================= */
 
-document.querySelectorAll('.gallery-grid img').forEach(img => {
-  img.addEventListener('click',() => {
-    document.getElementById('lightbox-image').src = img.src;
-    document.getElementById('lightbox').classList.add('active');
+const revealObserver = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12
+});
+
+document.querySelectorAll('.reveal').forEach(function (element) {
+  revealObserver.observe(element);
+});
+
+/* =================================
+   GALERÍA AMPLIABLE
+================================= */
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+
+document.querySelectorAll('.gallery-grid img').forEach(function (photo) {
+  photo.addEventListener('click', function () {
+    lightboxImage.src = photo.src;
+    lightbox.classList.add('active');
   });
 });
 
-function closeLightbox(event) {
-  if (
-    event.target.id === 'lightbox' ||
-    event.target.classList.contains('lightbox-close')
-  ) {
-    document.getElementById('lightbox').classList.remove('active');
+document.getElementById('closeLightbox').addEventListener('click', function () {
+  lightbox.classList.remove('active');
+});
+
+lightbox.addEventListener('click', function (event) {
+  if (event.target === lightbox) {
+    lightbox.classList.remove('active');
   }
-}
+});
 
-/* =========================================
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    lightbox.classList.remove('active');
+  }
+});
+
+/* =================================
    COPIAR ALIAS
-========================================= */
+================================= */
 
-async function copyAlias() {
-  const alias = document.getElementById('alias').textContent;
-  const message = document.getElementById('copy-message');
+document.getElementById('copyAlias').addEventListener('click', async function () {
+  const alias = 'emilia.tomas.regalos';
+  const message = document.getElementById('copyMessage');
 
   try {
     await navigator.clipboard.writeText(alias);
     message.textContent = '¡Alias copiado!';
   } catch (error) {
-    message.textContent = 'Copiá este alias: ' + alias;
+    message.textContent = 'Alias: ' + alias;
   }
-}
-
-/* =========================================
-   DESCARGAR CALENDARIO
-========================================= */
-
-function downloadCalendar() {
-  const event = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//IVORY//Invitacion de boda//ES',
-    'BEGIN:VEVENT',
-    'UID:emilia-tomas-boda-2027@example.com',
-    'DTSTAMP:20261113T120000Z',
-    'DTSTART:20270418T233000Z',
-    'DTEND:20270419T040000Z',
-    'SUMMARY:Boda de Emilia y Tomás',
-    'LOCATION:Casa Magnolia, Canning, Buenos Aires',
-    'DESCRIPTION:¡Te esperamos para celebrar nuestro amor!',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-
-  const blob = new Blob([event],{type:'text/calendar;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-
-  link.href = url;
-  link.download = 'boda-emilia-y-tomas.ics';
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  URL.revokeObjectURL(url);
-}
-
-/* =========================================
-   MÚSICA GENERADA
-========================================= */
-
-let audioContext = null;
-let musicPlaying = false;
-let musicTimer = null;
-let noteIndex = 0;
-
-const melody = [
-  261.63,329.63,392.00,329.63,
-  293.66,349.23,440.00,349.23,
-  261.63,329.63,392.00,523.25
-];
-
-function playNote() {
-  if (!musicPlaying || !audioContext) return;
-
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = 'sine';
-  oscillator.frequency.value = melody[noteIndex % melody.length];
-
-  gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.035,audioContext.currentTime + .15);
-  gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime + 1.3);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-
-  oscillator.start();
-  oscillator.stop(audioContext.currentTime + 1.4);
-
-  noteIndex++;
-}
-
-async function toggleMusic() {
-  const button = document.getElementById('musicButton');
-
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  }
-
-  if (audioContext.state === 'suspended') {
-    await audioContext.resume();
-  }
-
-  musicPlaying = !musicPlaying;
-
-  if (musicPlaying) {
-    button.textContent = '♫';
-    playNote();
-    musicTimer = setInterval(playNote,1400);
-  } else {
-    button.textContent = '♪';
-    clearInterval(musicTimer);
-  }
-}
-
-/* =========================================
-   ANIMACIONES AL DESPLAZARSE
-========================================= */
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:.12});
-
-document.querySelectorAll('.reveal').forEach(element => {
-  observer.observe(element);
 });
-
-/* BLOQUEAR SCROLL DETRÁS DE LA PORTADA */
-
-document.body.style.overflow = 'hidden';
-
 </script>
 
 </body>
 </html>
+
